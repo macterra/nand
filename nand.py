@@ -1,17 +1,12 @@
 import sys
 
 def next():
-    # Read one character from stdin
-    char = sys.stdin.read(1)
+    bit = sys.stdin.read(1)
 
-    if not char:
-        print()
-        exit(0);
-
-    if char == '0':
+    if bit == '0':
         return 0
 
-    if char == '1':
+    if bit == '1':
         return 1
 
     print()
