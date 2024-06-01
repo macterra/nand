@@ -1,12 +1,16 @@
 import sys
+from collections import deque
+
+bits = deque(sys.stdin.read().strip())
 
 def next_bit():
-    bit = sys.stdin.read(1)
+    global bits
+    bit = bits.popleft()
     if bit == '0':
         return 0
     if bit == '1':
         return 1
-    raise EOFError
+    raise IndexError
 
 def nand():
     a = nand() if next_bit() else next_bit()
@@ -14,14 +18,13 @@ def nand():
     return 1 if not (a and b) else 0
 
 def interpret():
+    global bits
     try:
         while True:
-            n = next_bit()
-            if n == 0:
-                print(next_bit(), end="")
-            elif n == 1:
-                print(nand(), end="")
-    except EOFError:
+            bit = str(nand() if next_bit() else next_bit())
+            print(bit, end="")
+            bits.append(bit)
+    except IndexError:
         print()
 
 if __name__ == "__main__":
