@@ -13,15 +13,16 @@ def next_bit():
     raise IndexError
 
 def nand():
-    a = nand() if next_bit() else next_bit()
-    b = nand() if next_bit() else next_bit()
-    return 1 if not (a and b) else 0
+    return 1 if not (cond() and cond()) else 0
+
+def cond():
+    return nand() if next_bit() else next_bit()
 
 def interpret():
     global bits
     try:
         while True:
-            bit = str(nand() if next_bit() else next_bit())
+            bit = str(cond())
             print(bit, end="")
             bits.append(bit)
     except IndexError:
